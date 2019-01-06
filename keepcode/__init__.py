@@ -2,6 +2,7 @@ import os
 
 from flask import Flask
 from . import db
+from . import auth, board
 
 def create_app(test_config=None):
     # create and configure the app
@@ -31,5 +32,12 @@ def create_app(test_config=None):
 
     # initialize database
     db.init_app(app)
+
+    # register authentication blueprint
+    app.register_blueprint(auth.bp)
+
+    # register board blueprint
+    app.register_blueprint(board.bp)
+    app.add_url_rule('/', endpoint='index')
 
     return app

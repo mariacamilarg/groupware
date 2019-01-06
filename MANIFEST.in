@@ -1,0 +1,4 @@
+include keepcode/schema.sql
+graft keepcode/static
+graft keepcode/templates
+global-exclude *.pyc
