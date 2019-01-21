@@ -41,4 +41,4 @@ The application will greet you on http://localhost:5000/
 
 * **Maria Camila Remolina Gutiérrez** - [mariacamilarg](https://github.com/mariacamilarg)
 * **Rafael Blanco** - [rafaelblanco25](https://github.com/rafaelblanco25)
-* **Zujany Milagros Salzar** - [zujany](https://github.com/zujany)
+* **Zujany Salazar** - [zujany](https://github.com/zujany)
