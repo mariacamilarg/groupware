@@ -70,7 +70,7 @@ def get_post(id, check_author=True):
 @bp.route('/<int:id>/update', methods=('GET', 'POST'))
 @login_required
 def update(id):
-    post = get_post(id)
+    post = get_post(id, check_author=False)
 
     if request.method == 'POST':
         title = request.form['title']
