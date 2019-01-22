@@ -79,11 +79,10 @@
             <div class="card text-white bg-warning mb-3" style="max-width: 20rem;">
               <div class="card-header">{{ post['programming_language'] }}</div>
               <div class="card-body">
-                <a class="action" href="{{ url_for('board.update', id=post['id']) }}">
+                <a class="action" href="{{ url_for('board.view', id=post['id']) }}">
                   <h4 class="card-title">{{ post['title'] }}</h4>
                 </a>
                 <p class="card-text">
-                  <!-- TODO put here code preview to guarantee standard height-->
                   {{ post['body'][:100] }}
                   <p>...</p>
                 </p>

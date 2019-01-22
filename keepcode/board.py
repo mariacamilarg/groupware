@@ -50,7 +50,7 @@ def create():
 
     return render_template('board/create.html')
 
-def get_post(id, check_author=True):
+def get_post(id, check_author=False):
     post = get_db().execute(
         'SELECT p.id, title, body, created, author_id,'
         ' last_updated, programming_language, username'
@@ -66,6 +66,12 @@ def get_post(id, check_author=True):
         abort(403)
 
     return post
+
+@bp.route('/<int:id>/view')
+@login_required
+def view(id):
+    post = get_post(id)
+    return render_template('board/view.html', post=post)
 
 @bp.route('/<int:id>/update', methods=('GET', 'POST'))
 @login_required

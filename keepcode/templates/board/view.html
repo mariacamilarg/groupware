@@ -1,0 +1,36 @@
+{% extends 'base.html' %}
+
+<!-- HEADER BLOCK -->
+{% block header %}
+  <!-- TITLE BLOCK -->
+  <h1>
+    {% block title %}
+      Code Snippet
+    {% endblock %}
+  </h1>
+{% endblock %}
+
+<!-- CONTENT BLOCK -->
+{% block content %}
+  <div class="card text-white bg-warning mb-9">
+    <div class="card-header">{{ post['programming_language'] }}</div>
+    <div class="card-body">
+      <h4 class="card-title">{{ post['title'] }}</h4>
+      <p class="card-text">
+        <!-- TODO render code prettier -->
+        {% for line in post['body'].split('\n') %}
+          <p>{{ line }}</p>
+        {% endfor %}
+      </p>
+    </div>
+  </div>
+
+  <hr>
+
+  <a class="action" href="{{ url_for('board.update', id=post['id']) }}">
+    <button type="button" class="btn btn-primary" value="Update">Update</button>
+  </a>
+
+  <hr>
+  
+{% endblock %}

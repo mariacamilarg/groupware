@@ -5,3 +5,7 @@
 .container {
   margin-top:30px;
 }
+
+.btn-delete {
+  float: "right";
+}
