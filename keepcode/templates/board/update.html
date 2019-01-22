@@ -1,20 +1,36 @@
 {% extends 'base.html' %}
 
+<!-- HEADER BLOCK -->
 {% block header %}
-  <h1>{% block title %}Edit "{{ post['title'] }}"{% endblock %}</h1>
+  <!-- TITLE BLOCK -->
+  <h1>
+    {% block title %}
+    Edit "{{ post['title'] }}"
+    {% endblock %}
+  </h1>
 {% endblock %}
 
+<!-- CONTENT BLOCK -->
 {% block content %}
   <form method="post">
-    <label for="title">Title</label>
-    <input name="title" id="title"
-      value="{{ request.form['title'] or post['title'] }}" required>
-    <label for="body">Body</label>
-    <textarea name="body" id="body">{{ request.form['body'] or post['body'] }}</textarea>
-    <input type="submit" value="Save">
-  </form>
-  <hr>
-  <form action="{{ url_for('board.delete', id=post['id']) }}" method="post">
-    <input class="danger" type="submit" value="Delete" onclick="return confirm('Are you sure?');">
+    <fieldset>
+      <div class="form-group">
+        <label for="programming_language">Programming Language:</label>
+        <input class="form-control" name="programming_language" id="programming_language" type="text" value="{{ request.form['programming_language'] or post['programming_language'] }}" required>
+      </div>
+      
+      <div class="form-group">
+        <label for="title">Title:</label>
+        <input class="form-control" name="title" id="title" type="text" value="{{ request.form['title'] or post['title'] }}" required>
+      </div>
+
+      <div class="form-group">
+        <label for="body">Code:</label>
+        <textarea class="form-control" name="body" id="body" rows="6">{{ request.form['body'] or post['body'] }}</textarea>
+      </div>
+
+      <button type="submit" class="btn btn-primary" value="Save">Save</button>
+      <button type="submit" class="btn btn-danger" value="Delete" action="{{ url_for('board.delete', id=post['id']) }}" onclick="return confirm('Are you sure?');">Delete</button>
+    </fieldset>
   </form>
 {% endblock %}
