@@ -22,10 +22,15 @@ If you're developping:
 export FLASK_ENV=development
 ```
 
-Now you can run it on the web:
+If you are initializing the database for the first time:
 
 ```
 flask init-db
+```
+
+Now you can run it on the web:
+
+```
 flask run
 ```
 
@@ -35,7 +40,7 @@ The application will greet you on http://localhost:5000/
 
 * Python
 * Flask
-* Bootstrap [sandstone](https://bootswatch.com/sandstone)
+* Bootstrap [minty](https://bootswatch.com/minty)
 
 ## Authors
 

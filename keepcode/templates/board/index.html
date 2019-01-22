@@ -1,28 +1,78 @@
 {% extends 'base.html' %}
 
-{% block header %}
-  <h1>{% block title %}Board{% endblock %}</h1>
+<!-- TITLE BLOCK -->
+{% block title %}
   {% if g.user %}
-    <a class="action" href="{{ url_for('board.create') }}">New</a>
+    Board
+  {% else %}
+    Home
   {% endif %}
 {% endblock %}
 
+<!-- HEADER BLOCK -->
+{% block header %}
+  {% if g.user %}
+    <div class="jumbotron">
+      <h1 class="display-3">Board</h1>
+      <p class="lead">
+        This is a simple post-it board to save your favorite code snippets.
+      </p>
+      <hr class="my-4">
+      <p>Members of the board (green is online, red is offline):</p>
+      <p class="lead">
+        <span class="badge badge-success">zujany</span>
+        <span class="badge badge-success">rafael</span>
+        <span class="badge badge-danger">michel</span>
+        <span class="badge badge-danger">cedric</span>
+      </p>
+    </div>   
+  {% else %}
+    <div class="jumbotron">
+      <h1 class="display-3">Welcome to KeepCode</h1>
+      <p class="lead">
+        This is a simple post-it board to save your favorite code snippets.
+      </p>
+      <hr class="my-4">
+      <p>Start by registering or log in to continue your work:</p>
+      <p class="lead">
+        <a class="btn btn-primary btn-lg" href="{{ url_for('auth.login') }}" role="button">Log In</a>
+        <a class="btn btn-secondary btn-lg" href="{{ url_for('auth.register') }}" role="button">Register</a>
+      </p>
+    </div>
+  {% endif %}
+{% endblock %}
+
+<!-- CONTENT BLOCK -->
 {% block content %}
-  {% for post in posts %}
-    <article class="post">
-      <header>
-        <div>
-          <h1>{{ post['title'] }}</h1>
-          <div class="about">by {{ post['username'] }} on {{ post['created'].strftime('%Y-%m-%d') }}</div>
+  {% if g.user %}
+    <div class="card text-white bg-warning mb-3" style="max-width: 20rem;">
+      <div class="card-header">Programming Language</div>
+      <div class="card-body">
+        <a class="action" href="{{ url_for('board.create') }}">
+          <h4 class="card-title">New Snippet</h4>
+        </a>
+        <p class="card-text">Code...</p>
+      </div>
+    </div>
+    {% for post in posts %}
+      <div class="card text-white bg-warning mb-3" style="max-width: 20rem;">
+        <div class="card-header">{{ post['programming_language'] }}</div>
+        <div class="card-body">
+          <a class="action" href="{{ url_for('board.update', id=post['id']) }}">
+            <h4 class="card-title">{{ post['title'] }}</h4>
+          </a>
+          <p class="card-text">
+            <!-- TODO put here code preview to guarantee standard height-->
+            {{ post['body'] }}
+          </p>
+          <!--
+            <div class="about">by {{ post['username'] }} on {{ post['created'].strftime('%Y-%m-%d') }}</div>
+          -->
         </div>
-        {% if g.user['id'] == post['author_id'] %}
-          <a class="action" href="{{ url_for('board.update', id=post['id']) }}">Edit</a>
-        {% endif %}
-      </header>
-      <p class="body">{{ post['body'] }}</p>
-    </article>
-    {% if not loop.last %}
-      <hr>
-    {% endif %}
-  {% endfor %}
+      </div>
+      {% if not loop.last %}
+        <hr>
+      {% endif %}
+    {% endfor %}
+  {% endif %}
 {% endblock %}

@@ -1,15 +1,71 @@
 {% extends 'base.html' %}
 
-{% block header %}
-  <h1>{% block title %}New Code Snippet{% endblock %}</h1>
+<!-- TITLE BLOCK -->
+{% block title %}
+  New Code Snippet
 {% endblock %}
 
+<!-- HEADER BLOCK -->
+{% block header %}
+  <!--
+  <div class="jumbotron">
+    <h1 class="display-3">New Code Snippet</h1>
+  </div> 
+  -->
+{% endblock %}
+
+<!-- CONTENT BLOCK -->
 {% block content %}
   <form method="post">
-    <label for="title">Title</label>
-    <input name="title" id="title" value="{{ request.form['title'] }}" required>
-    <label for="body">Code</label>
-    <textarea name="body" id="body">{{ request.form['body'] }}</textarea>
-    <input type="submit" value="Save">
+    <fieldset>
+      <legend>New Code Snippet</legend>
+
+      <!--
+      <fieldset class="form-group">
+        <label for="programming_language">Programming Language:</label>
+        <div class="form-check">
+          <label class="form-check-label">
+            <input type="radio" class="form-check-input" name="optionsRadios" id="optionsRadios1" value="option1" checked="">
+            Python
+          </label>
+        </div>
+        <div class="form-check">
+        <label class="form-check-label">
+            <input type="radio" class="form-check-input" name="optionsRadios" id="optionsRadios2" value="option2">
+            C
+          </label>
+        </div>
+        <div class="form-check disabled">
+        <label class="form-check-label">
+            <input type="radio" class="form-check-input" name="optionsRadios" id="optionsRadios3" value="option3">
+            Java
+          </label>
+        </div>
+        <div class="form-check disabled">
+          <label class="form-check-label">
+            <input type="radio" class="form-check-input" name="optionsRadios" id="optionsRadios4" value="option4">
+            Other
+          </label>
+        </div>
+      </fieldset>
+      -->
+      
+      <div class="form-group">
+        <label for="programming_language">Programming Language:</label>
+        <input class="form-control" name="programming_language" id="programming_language" type="text" value="{{ request.form['programming_language'] }}" required>
+      </div>
+      
+      <div class="form-group">
+        <label for="title">Title:</label>
+        <input class="form-control" name="title" id="title" type="text" value="{{ request.form['title'] }}" required>
+      </div>
+
+      <div class="form-group">
+        <label for="body">Code:</label>
+        <textarea class="form-control" name="body" id="body" rows="10">{{ request.form['body'] }}</textarea>
+      </div>
+
+      <button type="submit" class="btn btn-primary" value="Save">Create</button>
+    </fieldset>
   </form>
 {% endblock %}
