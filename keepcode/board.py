@@ -87,6 +87,15 @@ def view(id):
 def update(id):
     post = get_post(id, check_author=False)
 
+    db = get_db()
+    being_updated = 1
+    db.execute(
+        'UPDATE post SET being_updated = ?'
+        ' WHERE id = ?',
+        (being_updated, id)
+    )
+    db.commit()
+
     if request.method == 'POST':
         title = request.form['title']
         body = request.form['body']
@@ -105,10 +114,12 @@ def update(id):
         else:
             db = get_db()
             current_time = datetime.datetime.now()
+            being_updated = 0
             db.execute(
-                'UPDATE post SET title = ?, body = ?, programming_language = ?, last_updated = ?'
+                'UPDATE post SET title = ?, body = ?, programming_language = ?,'
+                ' last_updated = ?, being_updated = ?'
                 ' WHERE id = ?',
-                (title, body, programming_language, current_time, id)
+                (title, body, programming_language, current_time, being_updated, id)
             )
             db.commit()
             return redirect(url_for('board.index'))

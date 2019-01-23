@@ -17,5 +17,6 @@ CREATE TABLE post (
   title TEXT NOT NULL,
   body TEXT NOT NULL,
   programming_language TEXT NOT NULL,
+  being_updated BOOLEAN NOT NULL CHECK (online IN (0,1)) DEFAULT 0,
   FOREIGN KEY (author_id) REFERENCES user (id)
 );
