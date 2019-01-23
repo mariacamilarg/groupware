@@ -33,10 +33,13 @@
     </h1> 
     <p class="lead">
       <span>Members: </span>
-      <span class="badge badge-success">zujany</span>
-      <span class="badge badge-success">rafael</span>
-      <span class="badge badge-danger">michel</span>
-      <span class="badge badge-danger">cedric</span>
+      {% for user in users %}
+        {% if user['online'] == 1 %}
+          <span class="badge badge-success">{{ user['username'] }}</span>
+        {% else %}
+          <span class="badge badge-danger">{{ user['username'] }}</span>
+        {% endif %}
+      {% endfor %}
     </p>
   {% else %}
     <div class="jumbotron">

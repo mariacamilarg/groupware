@@ -1,4 +1,5 @@
 import functools
+import datetime
 
 from flask import (
     Blueprint, flash, g, redirect, render_template, request, session, url_for
@@ -58,7 +59,16 @@ def login():
 
         if error is None:
             session.clear()
-            session['user_id'] = user['id']
+            user_id = user['id']
+            current_time = datetime.datetime.now()
+            online = 1
+            session['user_id'] = user_id
+            db.execute(
+                'UPDATE user SET last_login = ?, online = ?'
+                ' WHERE id = ?',
+                (current_time, online, user_id)
+            )
+            db.commit()
             return redirect(url_for('index'))
 
         flash(error)
@@ -80,6 +90,15 @@ def load_logged_in_user():
 # logout user
 @bp.route('/logout')
 def logout():
+    db = get_db()
+    online = 0
+    user_id = session['user_id']
+    db.execute(
+        'UPDATE user SET online = ?'
+        ' WHERE id = ?',
+        (online, user_id)
+    )
+    db.commit()
     session.clear()
     return redirect(url_for('index'))
 
