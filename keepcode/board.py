@@ -6,6 +6,8 @@ from werkzeug.exceptions import abort
 from keepcode.auth import login_required
 from keepcode.db import get_db
 
+import datetime
+
 bp = Blueprint('board', __name__)
 
 @bp.route('/')
@@ -102,10 +104,11 @@ def update(id):
             flash(error)
         else:
             db = get_db()
+            current_time = datetime.datetime.now()
             db.execute(
-                'UPDATE post SET title = ?, body = ?, programming_language = ?'
+                'UPDATE post SET title = ?, body = ?, programming_language = ?, last_updated = ?'
                 ' WHERE id = ?',
-                (title, body, programming_language, id)
+                (title, body, programming_language, current_time, id)
             )
             db.commit()
             return redirect(url_for('board.index'))
