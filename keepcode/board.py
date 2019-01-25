@@ -76,11 +76,26 @@ def get_post(id, check_author=False):
 
     return post
 
+def get_user(id):
+    user = get_db().execute(
+        'SELECT u.id, username, password, last_login, online'
+        ' FROM user u'
+        ' WHERE u.id = ?',
+        (id,)
+    ).fetchone()
+
+    if user is None:
+        abort(404, "Post id {0} doesn't exist.".format(id))
+
+    return user
+
 @bp.route('/<int:id>/view')
 @login_required
 def view(id):
     post = get_post(id)
-    return render_template('board/view.html', post=post)
+    user_id = post['author_id']
+    user = get_user(user_id)
+    return render_template('board/view.html', post=post, user=user)
 
 @bp.route('/<int:id>/update', methods=('GET', 'POST'))
 @login_required

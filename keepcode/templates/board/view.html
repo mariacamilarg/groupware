@@ -27,6 +27,14 @@
 
   <hr>
 
+  <b>Author: </b>{{ user['username'] }}
+  <br/>
+  <b>Created: </b>{{ post['created'].strftime("%d-%m-%Y at %H:%M") }}
+  <br/>
+  <b>Last Updated: </b>{{ post['last_updated'].strftime("%d-%m-%Y at %H:%M") }}
+
+  <hr>
+
   {% if post['being_updated'] == 0 %}
     <a class="action" href="{{ url_for('board.update', id=post['id']) }}">
       <button type="button" class="btn btn-primary" value="Update">Update</button>
