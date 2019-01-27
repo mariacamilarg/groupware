@@ -34,16 +34,22 @@
   <b>Last Updated: </b>{{ post['last_updated'].strftime("%d-%m-%Y at %H:%M") }}
 
   <hr>
-
-  {% if post['being_updated'] == 0 %}
-    <a class="action" href="{{ url_for('board.update', id=post['id']) }}">
-      <button type="button" class="btn btn-primary" value="Update">Update</button>
-    </a>
-  {% else %}
-    <button type="button" class="btn btn-primary" value="Update" disabled>Update</button>
-    You can't update this snippet because someone else is currently editing it. 
+  <div id="update_button">
+    {% if post['being_updated'] == 0 %}
+      <a class="action" href="{{ url_for('board.update', id=post['id']) }}">
+        <button type="button" class="btn btn-primary" value="Update">Update</button>
+      </a>
+    {% else %}
+      <button type="button" class="btn btn-primary" value="Update" disabled>Update</button>
+      You can't update this snippet because someone else is currently editing it. 
+  </div>
   {% endif %}
-
+  <script type="text/javascript">
+      setInterval("update_available();",1000); 
+      function update_available(){
+        $( "#update_button" ).load(window.location.href + " #update_button" );
+      }
+  </script>
   <hr>
   
 {% endblock %}
