@@ -57,7 +57,7 @@
       </p>
     </div>
   {% endif %}
-  
+
   <script type="text/javascript">
       setInterval("my_function();",3000); 
       function my_function(){
@@ -70,7 +70,7 @@
 {% block content %}
   {% if g.user %}
     <div class="row justify-content-center">
-      <div class="card-deck">
+      <div class="card-deck" id = "post_displayed">
         <div class="col-auto mb-3">
             <div class="card text-white bg-secondary mb-3" style="max-width: 20rem;">
               <div class="card-header">Programming Language</div>
@@ -85,27 +85,52 @@
               </div>
             </div>
         </div>
-      
-        {% for post in posts %}
-          <div class="col-auto mb-3">
-            <div class="card text-white bg-warning mb-3" style="max-width: 20rem;">
-              <div class="card-header">{{ post['programming_language'] }}</div>
-              <div class="card-body">
-                <a class="action" href="{{ url_for('board.view', id=post['id']) }}">
-                  <h4 class="card-title">{{ post['title'] }}</h4>
-                </a>
-                <p class="card-text">
-                  {{ post['body'][:98] }}
-                  <p>...</p>
-                </p>
-                <!--
-                  <div class="about">by {{ post['username'] }} on {{ post['created'].strftime('%Y-%m-%d') }}</div>
-                -->
+        <!-- <div id = "post_displayed"> -->
+          {% for post in posts %}
+            {% if post['being_updated'] == 0 %}
+              <div class="col-auto mb-3">
+                <div class="card text-white bg-warning mb-3" style="max-width: 20rem;">
+                  <div class="card-header">{{ post['programming_language'] }}</div>
+                  <div class="card-body">
+                    <a class="action" href="{{ url_for('board.view', id=post['id']) }}">
+                      <h4 class="card-title">{{ post['title'] }}</h4>
+                    </a>
+                    <p class="card-text">
+                      {{ post['body'][:98] }}
+                      <p>...</p>
+                    </p>
+                    <!--
+                      <div class="about">by {{ post['username'] }} on {{ post['created'].strftime('%Y-%m-%d') }}</div>
+                    -->
+                  </div>
+                </div>
               </div>
-            </div>
-          </div>
-        {% endfor %}
+            {% else %}
+              <div class="col-auto mb-3">
+                <div class="card text-white bg-secondary mb-3" style="max-width: 20rem;">
+                  <div class="card-header">{{ post['programming_language'] }}</div>
+                  <div class="card-body">
+                    <h4 class="card-title">{{ post['title'] }}</h4>
+                    <p class="card-text">
+                      {{ post['body'][:98] }}
+                      <p>...</p>
+                    </p>
+                    <!--
+                      <div class="about">by {{ post['username'] }} on {{ post['created'].strftime('%Y-%m-%d') }}</div>
+                    -->
+                  </div>
+                </div>
+              </div>
+            {% endif %}
+          {% endfor %}
+        <!-- </div> -->
       </div>
     </div>
   {% endif %}
+  <script type="text/javascript">
+      setInterval("update_post_displayed();",3000); 
+      function update_post_displayed(){
+        $( "#post_displayed" ).load(window.location.href + " #post_displayed" );
+      }
+  </script>
 {% endblock %}
