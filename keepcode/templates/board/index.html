@@ -57,17 +57,13 @@
       </p>
     </div>
   {% endif %}
-<script
-src="https://code.jquery.com/jquery-3.2.1.min.js"
-integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="
-crossorigin="anonymous"></script>
-
-<script type="text/javascript">
-    setInterval("my_function();",3000); 
-    function my_function(){
-      $( "#online" ).load(window.location.href + " #online" );
-    }
-</script>
+  
+  <script type="text/javascript">
+      setInterval("my_function();",3000); 
+      function my_function(){
+        $( "#online" ).load(window.location.href + " #online" );
+      }
+  </script>
 {% endblock %}
 
 <!-- CONTENT BLOCK -->
