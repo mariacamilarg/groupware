@@ -31,16 +31,18 @@
     <h1>
       Board
     </h1> 
-    <p class="lead">
-      <span>Members: </span>
-      {% for user in users %}
-        {% if user['online'] == 1 %}
-          <span class="badge badge-success">{{ user['username'] }}</span>
-        {% else %}
-          <span class="badge badge-danger">{{ user['username'] }}</span>
-        {% endif %}
-      {% endfor %}
-    </p>
+    <div id="online">
+      <p class="lead">
+        <span>Members: </span>
+        {% for user in users %}
+          {% if user['online'] == 1 %}
+            <span class="badge badge-success">{{ user['username'] }}</span>
+          {% else %}
+            <span class="badge badge-danger">{{ user['username'] }}</span>
+          {% endif %}
+        {% endfor %}
+      </p>
+    </div>
   {% else %}
     <div class="jumbotron">
       <h1 class="display-3">Welcome to KeepCode</h1>
@@ -55,6 +57,17 @@
       </p>
     </div>
   {% endif %}
+<script
+src="https://code.jquery.com/jquery-3.2.1.min.js"
+integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="
+crossorigin="anonymous"></script>
+
+<script type="text/javascript">
+    setInterval("my_function();",3000); 
+    function my_function(){
+      $( "#online" ).load(window.location.href + " #online" );
+    }
+</script>
 {% endblock %}
 
 <!-- CONTENT BLOCK -->
@@ -100,3 +113,28 @@
     </div>
   {% endif %}
 {% endblock %}
+
+<!-- <script
+src="https://code.jquery.com/jquery-3.2.1.min.js"
+integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="
+crossorigin="anonymous"></script>
+
+<script type="text/javascript">
+    setInterval("my_function();",1000); 
+    function my_function(){
+      //$('#online').load(location.href);
+      alert("Hello! I am an alert box!");
+      $( "#online" ).load(window.location.href + " #online" );
+    }
+    // setInterval("other();",1000);
+    // function other(){
+    //   $.ajax({
+    //       url: "/_get_data/",
+    //       type: "POST",
+    //       success: function(resp){
+    //           $('div#online').append(resp.data);
+    //       }
+    //   });
+    // };
+
+</script> -->
