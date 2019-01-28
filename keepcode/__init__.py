@@ -1,8 +1,11 @@
 import os
 
 from flask import Flask
-from . import db
-from . import auth, board
+#from . import db
+import db
+#from . import auth, board
+import auth
+import board
 
 def create_app(test_config=None):
     # create and configure the app
@@ -37,4 +40,4 @@ def create_app(test_config=None):
 
     return app
 
-
+create_app().run()

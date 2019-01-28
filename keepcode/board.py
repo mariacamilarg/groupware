@@ -3,8 +3,10 @@ from flask import (
 )
 from werkzeug.exceptions import abort
 
-from keepcode.auth import login_required
-from keepcode.db import get_db
+#from keepcode.auth import login_required
+#from keepcode.db import get_db
+from auth import login_required
+from db import get_db
 
 import datetime
 
