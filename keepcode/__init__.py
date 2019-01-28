@@ -14,10 +14,10 @@ def create_app(test_config=None):
     #     SECRET_KEY='dev',
     #     DATABASE=os.path.join(app.instance_path, '../instance/keepcode.sqlite'),
     # )
-    #print(os.path.join(os.path.abspath(__file__), '../instance/keepcode.sqlite'))
+    #print(os.path.join(os.path.dirname(os.path.realpath(__file__)), '../instance/keepcode.sqlite'))
     app.config.from_mapping(
         SECRET_KEY='dev',
-        DATABASE=os.path.join(os.path.abspath(__file__), '../instance/keepcode.sqlite'),
+        DATABASE=os.path.join(os.path.dirname(os.path.realpath(__file__)), '../instance/keepcode.sqlite'),
     )
 
     if test_config is None:
@@ -46,4 +46,4 @@ def create_app(test_config=None):
     return app
 
 app = create_app()
-#app.run()
+app.run()
