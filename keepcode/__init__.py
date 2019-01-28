@@ -12,11 +12,12 @@ def create_app(test_config=None):
     app = Flask(__name__, instance_relative_config=True)
     # app.config.from_mapping(
     #     SECRET_KEY='dev',
-    #     DATABASE=os.path.join(app.instance_path, 'keepcode.sqlite'),
+    #     DATABASE=os.path.join(app.instance_path, '../instance/keepcode.sqlite'),
     # )
+    #print(os.path.join(os.path.abspath(__file__), '../instance/keepcode.sqlite'))
     app.config.from_mapping(
         SECRET_KEY='dev',
-        DATABASE='../instance/keepcode.sqlite',
+        DATABASE=os.path.join(os.path.abspath(__file__), '../instance/keepcode.sqlite'),
     )
 
     if test_config is None:
