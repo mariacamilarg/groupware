@@ -22,7 +22,7 @@ def index():
     users = db.execute(
         'SELECT id, username, last_login, online'
         ' FROM user u'
-        ' ORDER BY last_login DESC'
+        ' ORDER BY username ASC'
     ).fetchall()
     #for u in users:
     #    print(u['username'], u['online'])
