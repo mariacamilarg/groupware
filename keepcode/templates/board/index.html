@@ -38,7 +38,7 @@
           {% if user['online'] == 1 %}
             <span class="badge badge-success">{{ user['username'] }}</span>
           {% else %}
-            <span class="badge badge-danger">{{ user['username'] }}</span>
+            <span class="badge badge-light">{{ user['username'] }}</span>
           {% endif %}
         {% endfor %}
       </p>
@@ -72,11 +72,11 @@
     <div class="row justify-content-center">
       <div class="card-deck" id = "post_displayed">
         <div class="col-auto mb-3">
-            <div class="card text-white bg-secondary mb-3" style="max-width: 20rem;">
+            <div class="card text-white bg-info mb-3" style="max-width: 20rem;">
               <div class="card-header">Programming Language</div>
               <div class="card-body">
                 <a class="action" href="{{ url_for('board.create') }}">
-                  <h4 class="card-title">New Snippet</h4>
+                  <h4 class="card-title text-muted">New Snippet</h4>
                 </a>
                 <p class="card-text">
                   Create a NEW code snippet for the board and share it with your colleagues.
@@ -89,11 +89,11 @@
           {% for post in posts %}
             {% if post['being_updated'] == 0 %}
               <div class="col-auto mb-3">
-                <div class="card text-white bg-warning mb-3" style="max-width: 20rem;">
+                <div class="card bg-warning mb-3" style="max-width: 20rem;">
                   <div class="card-header">{{ post['programming_language'] }}</div>
                   <div class="card-body">
                     <a class="action" href="{{ url_for('board.view', id=post['id']) }}">
-                      <h4 class="card-title">{{ post['title'] }}</h4>
+                      <h4 class="card-title text-white">{{ post['title'] }}</h4>
                     </a>
                     <p class="card-text">
                       {{ post['body'][:98] }}
@@ -107,7 +107,7 @@
               </div>
             {% else %}
               <div class="col-auto mb-3">
-                <div class="card text-white bg-secondary mb-3" style="max-width: 20rem;">
+                <div class="card bg-light mb-3" style="max-width: 20rem;">
                   <div class="card-header">{{ post['programming_language'] }}</div>
                   <div class="card-body">
                     <h4 class="card-title">{{ post['title'] }}</h4>
